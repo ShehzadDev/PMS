@@ -1,5 +1,15 @@
 from django.shortcuts import render
-from .models import Project, User
+from .models import (
+    Project,
+    User,
+    Profile,
+    Document,
+    Task,
+    Comment,
+    UserProfile,
+    TaskStatus,
+    CommentAuthor,
+)
 from django.db.models import Q
 from django.utils import timezone
 from datetime import datetime
@@ -16,6 +26,12 @@ def project(request):
     projects = Project.objects.all()
 
     return render(request, "project.html", {"projects": projects})
+
+
+def tasks(request):
+    tasks = Task.objects.all()
+
+    return render(request, "tasks.html", {"tasks": tasks})
 
 
 def users(request):
@@ -104,10 +120,10 @@ def users(request):
     #     username="help", defaults={"email": "help1@managepro.com"}
     # )
 
-    # rcount = users.count()
+    rcount = users.count()
 
     return render(
         request,
         "users.html",
-        {"users": users, "count": count, "user": user},
+        {"users": users, "count": count, "rcount": rcount, "user": user},
     )
